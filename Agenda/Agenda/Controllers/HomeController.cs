@@ -42,6 +42,7 @@ namespace Agenda.Controllers
                 model.Event.CreatedDate = DateTime.Now;
                 _dbContext.Add(model.Event);
                 _dbContext.SaveChanges();
+                ModelState.Clear();
             }
             else
             {

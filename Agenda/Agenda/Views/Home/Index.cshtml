@@ -45,7 +45,61 @@
             </tr>
         </thead>
         <tbody>
-            <tr> </tr>
+            <tr>
+                @{
+
+                    <td class="very-urgent">
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.VeryUrgent))
+                        {
+                            <ul>
+                                <li>
+                                    @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                    <td class="urgent">
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent))
+                        {
+                            <ul>
+                                <li>
+                                    @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                    <td class="normal">
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal))
+                        {
+                            <ul>
+                                <li>
+                                    @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                    <td class="not-urgent">
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgent))
+                        {
+                            <ul>
+                                <li>
+                                    @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                    <td class="not-urgent-at-all">
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll))
+                        {
+                            <ul>
+                                <li>
+                                    @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
+                                </li>
+                            </ul>
+                        }
+                    </td>
+                }
+            </tr>
         </tbody>
     </table>
 </div>
