@@ -1,0 +1,51 @@
+﻿@model Agenda.HomeIndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                @{
+                    foreach (var item in Model.UrgencyList)
+                    {
+                        switch (item.ObjectId)
+                        {
+                            case AgendaDataAccessLayer.EventUrgency.VeryUrgent:
+                                <th scope="col" class="very-urgent display-6">
+                                    @item.Name
+                                </th>
+                                break;
+                            case AgendaDataAccessLayer.EventUrgency.Urgent:
+                                <th scope="col" class="urgent display-6">
+                                    @item.Name
+                                </th>
+                                break;
+                            case AgendaDataAccessLayer.EventUrgency.Normal:
+                                <th scope="col" class="normal display-6">
+                                    @item.Name
+                                </th>
+                                break;
+                            case AgendaDataAccessLayer.EventUrgency.NotUrgent:
+                                <th scope="col" class="not-urgent display-6">
+                                    @item.Name
+                                </th>
+                                break;
+                            case AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll:
+                                <th scope="col" class="not-urgent-at-all display-6">
+                                    @item.Name
+                                </th>
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr> </tr>
+        </tbody>
+    </table>
+</div>

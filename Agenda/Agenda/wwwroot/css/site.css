@@ -1,0 +1,77 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #F0F1F2
+}
+
+#navbar-light {
+    background-color: #5C6273;
+}
+
+#footer-light {
+    background-color: #F0F1F2;
+}
+
+.nav-link {
+    color: #F0F1F2;
+    text-decoration: none;
+}
+
+    .nav-link:hover {
+        background: #666D80;
+        color: #F0F1F2;
+    }
+
+.brand {
+    font-size: 20px;
+}
+
+.list-item {
+    margin-top: 4px;
+}
+
+.very-urgent {
+    color: #A61420
+}
+
+.urgent {
+    color: #F20519
+}
+
+.normal {
+    color: #F2B705
+}
+
+.not-urgent {
+    color: #1DA9F2
+}
+
+.not-urgent-at-all {
+    color: #0C71A6
+}
+
+.add-event {
+    margin-right:15px;
+}
+
+    .add-event:hover {
+        background-color: black
+    }
+
+.menu-items{
+    margin-left:15px;
+}

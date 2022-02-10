@@ -1,0 +1,34 @@
+﻿@model Agenda.AddEventModel
+
+<form id="add-event-form" asp-controller="Home" asp-action="AddEvent">
+    <div class="modal-body">
+        <div class="mb-3 row">
+            <label for="event-title" class="col-sm-3 col-form-label">Event Title</label>
+            <div class="col-sm-9">
+                <input asp-for="Event.Title" class="form-control" id="event-title">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="event-explanation" class="col-sm-3 col-form-label">Explanation</label>
+            <div class="col-sm-9">
+                <input asp-for="Event.Explanation" class="form-control" id="event-explanation">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="event-date" class="col-sm-3 col-form-label">Date</label>
+            <div class="col-sm-9">
+                <input type="date" asp-for="Event.EventDate" class="form-control" id="event-date">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="event-urgency" class="col-sm-3 col-form-label">Event Urgency</label>
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model=>model.Event.EventUrgencyId, new SelectList(Model.EventUrgencyList, "ObjectId", "Name"), htmlAttributes:new{@class="form-control", @id="ddlUrgency"})
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="add-event-button" type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
