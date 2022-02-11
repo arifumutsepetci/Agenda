@@ -40,7 +40,7 @@ namespace Agenda.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddEvent(AddEventModel model)
+        public IActionResult Index(AddEventModel model)
         {
             bool isSuccessful;
             if (ModelState.IsValid)
@@ -53,22 +53,17 @@ namespace Agenda.Controllers
             }
             else
                 isSuccessful = false;
-            return View("Index", new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList(), isSuccessful, null));
+            return View("Index", new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList(), isSuccessful));
         }
 
         [HttpPost]
         public IActionResult DoEvents(string[] eventIdArray)
         {
-            bool isMarkingAsDoneSuccessful = false;
             if (eventIdArray.Count() > 0)
-            {
                 foreach (var item in eventIdArray)
                     _dbContext.GetEventByEventId(Convert.ToInt32(item)).IsDone = true;
-
-                isMarkingAsDoneSuccessful = true;
-            }
             _dbContext.SaveChanges();
-            return View("Index", new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList(), null, isMarkingAsDoneSuccessful));
+            return Json(new { result = "Redirect", url = Url.Action("Index", "Home") });
         }
     }
 }
