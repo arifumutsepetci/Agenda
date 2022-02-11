@@ -18,7 +18,16 @@ namespace AgendaDataAccessLayer
         }
         public List<Events> GetEventList()
         {
-            return Events.Where(i=>!i.IsDeleted).ToList();
+            return Events.Where(i => !i.IsDeleted).ToList();
         }
+        public List<Events> GetEventIsntDoneList()
+        {
+            return Events.Where(i => !i.IsDeleted && !i.IsDone).ToList();
+        }
+        public List<Events> GetEventIsDoneList()
+        {
+            return Events.Where(i => !i.IsDeleted && i.IsDone).ToList();
+        }
+
     }
 }

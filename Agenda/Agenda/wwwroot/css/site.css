@@ -44,11 +44,11 @@ body {
     margin-top: 4px;
 }
 
-.very-urgent {
+.urgent {
     color: #A61420
 }
 
-.urgent {
+.very-urgent {
     color: #F20519
 }
 
@@ -74,4 +74,14 @@ body {
 
 .menu-items {
     margin-left: 15px;
+}
+
+td ul li {
+    list-style-type: none;
+    list-style: none;
+    margin-left: -30px;
+}
+
+.done-event-div {
+    text-align: end;
 }

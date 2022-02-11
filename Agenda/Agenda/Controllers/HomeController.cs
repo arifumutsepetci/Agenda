@@ -18,8 +18,7 @@ namespace Agenda.Controllers
 
         public IActionResult Index()
         {
-            var model = new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList() };
-
+            var model = new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList());
             return View(model);
         }
 
@@ -36,7 +35,8 @@ namespace Agenda.Controllers
 
         public IActionResult AddEvent()
         {
-            return View("Index", new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList() });
+            var model = new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList());
+            return View("Index", model);
         }
 
         [HttpPost]
@@ -53,7 +53,22 @@ namespace Agenda.Controllers
             }
             else
                 isSuccessful = false;
-            return View("Index", new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList(), IsSuccessful = isSuccessful });
+            return View("Index", new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList(), isSuccessful, null));
+        }
+
+        [HttpPost]
+        public IActionResult DoEvents(string[] eventIdArray)
+        {
+            bool isMarkingAsDoneSuccessful = false;
+            if (eventIdArray.Count() > 0)
+            {
+                foreach (var item in eventIdArray)
+                    _dbContext.GetEventByEventId(Convert.ToInt32(item)).IsDone = true;
+
+                isMarkingAsDoneSuccessful = true;
+            }
+            _dbContext.SaveChanges();
+            return View("Index", new HomeIndexModel(_dbContext.GetEventIsntDoneList(), _dbContext.GetEventUrgencyList(), null, isMarkingAsDoneSuccessful));
         }
     }
 }
