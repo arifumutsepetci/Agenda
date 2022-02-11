@@ -34,21 +34,26 @@ namespace Agenda.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult AddEvent()
+        {
+            return View("Index", new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList() });
+        }
+
         [HttpPost]
         public IActionResult AddEvent(AddEventModel model)
         {
+            bool isSuccessful;
             if (ModelState.IsValid)
             {
                 model.Event.CreatedDate = DateTime.Now;
                 _dbContext.Add(model.Event);
                 _dbContext.SaveChanges();
+                isSuccessful = true;
                 ModelState.Clear();
             }
             else
-            {
-
-            }
-            return View("Index", new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList() });
+                isSuccessful = false;
+            return View("Index", new HomeIndexModel { EventList = _dbContext.GetEventList(), UrgencyList = _dbContext.GetEventUrgencyList(), IsSuccessful = isSuccessful });
         }
     }
 }

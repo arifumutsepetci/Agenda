@@ -11,12 +11,12 @@ namespace AgendaDataAccessLayer
     {
         [Key]
         public int ObjectId { get; set; }
-        [MaxLength(50, ErrorMessage ="Title should not be longer than 50 words.")]
+        [MaxLength(50, ErrorMessage ="Title should not be longer than 50 characters.")]
         [Required(ErrorMessage = "Please type a title.")]
         public string Title { get; set; }
         [MaxLength(250)]
-        public string Explanation { get; set; }
-        [Required]
+        public string? Explanation { get; set; }
+        [Required(ErrorMessage = "Please type an event date.")]
         public DateTime CreatedDate { get; set; }
         [Required]
         public DateTime EventDate { get; set; }

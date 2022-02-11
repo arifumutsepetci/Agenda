@@ -4,6 +4,7 @@
 }
 
 <div>
+    <input id="IsEventAddedSuccessfully" type="hidden" asp-for="IsSuccessful" />
     <table class="table">
         <thead>
             <tr>
@@ -49,53 +50,53 @@
                 @{
 
                     <td class="very-urgent">
-                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.VeryUrgent))
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.VeryUrgent).OrderByDescending(i => i.EventDate).ThenBy(i => i.Title))
                         {
-                            <ul>
+                            <ol>
                                 <li>
                                     @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
                                 </li>
-                            </ul>
+                            </ol>
                         }
                     </td>
                     <td class="urgent">
-                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent))
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent).OrderByDescending(i => i.EventDate).ThenBy(i => i.Title))
                         {
-                            <ul>
+                            <ol>
                                 <li>
                                     @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
                                 </li>
-                            </ul>
+                            </ol>
                         }
                     </td>
                     <td class="normal">
-                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal))
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal).OrderByDescending(i => i.EventDate).ThenBy(i => i.Title))
                         {
-                            <ul>
+                            <ol>
                                 <li>
                                     @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
                                 </li>
-                            </ul>
+                            </ol>
                         }
                     </td>
                     <td class="not-urgent">
-                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgent))
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgent).OrderByDescending(i => i.EventDate).ThenBy(i => i.Title))
                         {
-                            <ul>
+                            <ol>
                                 <li>
                                     @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
                                 </li>
-                            </ul>
+                            </ol>
                         }
                     </td>
                     <td class="not-urgent-at-all">
-                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll))
+                        @foreach (var item in Model.EventList.Where(i => i.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll).OrderByDescending(i => i.EventDate).ThenBy(i => i.Title))
                         {
-                            <ul>
+                            <ol>
                                 <li>
                                     @item.Title: @item.EventDate.ToString("dd-MM-yyyy")
                                 </li>
-                            </ul>
+                            </ol>
                         }
                     </td>
                 }
