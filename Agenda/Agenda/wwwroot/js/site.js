@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 $('#done-event-button').click(function () {
     let selected = [];
-    $('input:checked').each(function () {
+    $('tr input:checked').each(function () {
         selected.push($(this).attr('id'));
     });
 
