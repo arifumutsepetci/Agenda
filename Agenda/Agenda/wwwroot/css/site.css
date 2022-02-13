@@ -89,3 +89,11 @@ td ul li {
 .done-event-div {
     text-align: end;
 }
+
+.table {
+    table-layout: fixed;
+}
+
+#event-is-interval {
+    margin-top: 12px;
+}

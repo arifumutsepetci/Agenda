@@ -12,5 +12,6 @@ namespace Agenda
 
         public Events Event { get; set; }
         public List<EventUrgency> EventUrgencyList { get; set; }
+        public bool IsInterval { get; set; }
     }
 }

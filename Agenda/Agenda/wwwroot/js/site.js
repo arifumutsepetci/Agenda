@@ -6,9 +6,14 @@ $('#close-modal').click(function () {
     $('#addEventModal').modal('toggle');
 });
 
-var now = new Date();
+let now = new Date();
+let tomorrow = new Date(now);
+tomorrow.setDate(tomorrow.getDate() + 1);
 now.setUTCHours(0, 0, 0);
-document.getElementById('event-date').value = now.toISOString().slice(0, 16);
+tomorrow.setUTCHours(0, 0, 0);
+document.getElementById('event-date-start').value = now.toISOString().slice(0, 16);
+document.getElementById('event-date').value = tomorrow.toISOString().slice(0, 16);
+
 
 $(document).ready(function () {
     let IsEventAddedSuccessfully = $('#IsEventAddedSuccessfully').val();
@@ -47,3 +52,15 @@ $('#done-event-button').click(function () {
         }
     })
 });
+
+$('#event-is-interval').change(function () {
+    if (this.checked) {
+        $('#date-interval-start').show();
+        document.getElementById('event-date').value = tomorrow.toISOString().slice(0, 16);
+    }
+    else {
+        $('#date-interval-start').hide();
+        document.getElementById('event-date').value = now.toISOString().slice(0, 16);
+    }
+
+})

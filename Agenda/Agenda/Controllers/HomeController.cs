@@ -45,6 +45,8 @@ namespace Agenda.Controllers
             bool isSuccessful;
             if (ModelState.IsValid)
             {
+                if (!model.IsInterval)
+                    model.Event.EventDateIntervalStart = null;
                 model.Event.CreatedDate = DateTime.Now;
                 _dbContext.Add(model.Event);
                 _dbContext.SaveChanges();

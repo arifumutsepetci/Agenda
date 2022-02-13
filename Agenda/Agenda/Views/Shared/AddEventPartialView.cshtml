@@ -16,7 +16,19 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="event-date" class="col-sm-3 col-form-label">Date</label>
+            <label for="event-is-interval" class="col-sm-3 col-form-label">Is Interval?</label>
+            <div class="col-sm-9">
+                <input asp-for="IsInterval" type="checkbox" class="form-check-input" checked="checked" id="event-is-interval">
+            </div>
+        </div>
+        <div id="date-interval-start" class="mb-3 row">
+            <label for="event-date-start" class="col-sm-3 col-form-label">Interval Start</label>
+            <div class="col-sm-9">
+                <input asp-for="Event.EventDateIntervalStart" name="Event.EventDateIntervalStart" type="datetime-local" class="form-control" id="event-date-start">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="event-date" class="col-sm-3 col-form-label">Deadline</label>
             <div class="col-sm-9">
                 <input asp-for="Event.EventDate" name="Event.EventDate" type="datetime-local" data-val="true" data-val-required="Date of event is required." class="form-control" id="event-date">
                 <span class="text-danger field-validation-valid" data-valmsg-for="event-date" data-valmsg-replace="true"></span>
