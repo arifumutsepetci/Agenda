@@ -60,8 +60,18 @@ namespace Agenda.Controllers
         public IActionResult DoEvents(string[] eventIdArray)
         {
             if (eventIdArray.Count() > 0)
+            {
+                AgendaDataAccessLayer.Events doneEvent;
                 foreach (var item in eventIdArray)
-                    _dbContext.GetEventByEventId(Convert.ToInt32(item)).IsDone = true;
+                {
+                    doneEvent = _dbContext.GetEventByEventId(Convert.ToInt32(item));
+                    if (doneEvent != null)
+                    {
+                        doneEvent.IsDone = true;
+                        doneEvent.CompletionDate = DateTime.Now;
+                    }
+                }
+            }
             _dbContext.SaveChanges();
             return Json(new { result = "Redirect", url = Url.Action("Index", "Home") });
         }

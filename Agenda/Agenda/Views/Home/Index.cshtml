@@ -7,6 +7,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th scope="col" class="overdue display-6">
+                Overdue
+            </th>
             @{
                 foreach (var item in Model.UrgencyList)
                 {
@@ -47,8 +50,19 @@
     <tbody>
         <tr>
             @{
+                <td class="overdue">
+                    @foreach (var item in Model.EventList.Where(i => i.Event.EventDate < DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                    {
+                        <ul>
+                            <li>
+                                <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
+                                <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                            </li>
+                        </ul>
+                    }
+                </td>
                 <td class="very-urgent">
-                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.VeryUrgent).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.VeryUrgent && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
                         <ul>
                             <li>
@@ -62,7 +76,7 @@
                 <td class="urgent">
                     <div style="text-align:left">
 
-                        @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                        @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                         {
                             <ul>
                                 <li>
@@ -75,7 +89,7 @@
                 </td>
 
                 <td class="normal">
-                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
                         <ul>
                             <li>
@@ -86,7 +100,7 @@
                     }
                 </td>
                 <td class="not-urgent">
-                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgent).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgent && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
                         <ul>
                             <li>
@@ -97,7 +111,7 @@
                     }
                 </td>
                 <td class="not-urgent-at-all">
-                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
+                    @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
                         <ul>
                             <li>

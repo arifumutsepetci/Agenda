@@ -6,7 +6,9 @@ $('#close-modal').click(function () {
     $('#addEventModal').modal('toggle');
 });
 
-document.getElementById('event-date').valueAsDate = new Date();
+var now = new Date();
+now.setUTCHours(0, 0, 0);
+document.getElementById('event-date').value = now.toISOString().slice(0, 16);
 
 $(document).ready(function () {
     let IsEventAddedSuccessfully = $('#IsEventAddedSuccessfully').val();

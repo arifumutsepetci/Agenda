@@ -64,6 +64,10 @@ body {
     color: #0C71A6
 }
 
+.overdue {
+    color: black;
+}
+
 .add-event {
     margin-right: 15px;
 }

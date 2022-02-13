@@ -4,6 +4,7 @@ using AgendaDataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaDataAccessLayer.Migrations
 {
     [DbContext(typeof(AgendaContext))]
-    partial class AgendaContextModelSnapshot : ModelSnapshot
+    [Migration("20220213111342_interval")]
+    partial class interval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,6 @@ namespace AgendaDataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsReminder")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")

@@ -20,11 +20,13 @@ namespace AgendaDataAccessLayer
         public DateTime CreatedDate { get; set; }
         [Required]
         public DateTime EventDate { get; set; }
+        public DateTime? EventDateIntervalStart { get; set; }
         public DateTime? CompletionDate { get; set; }
         public int EventUrgencyId { get; set; }
         [MaxLength(500)]
         public string? Comment { get; set; }
         public bool IsDone { get; set; } = false;
         public bool IsDeleted { get; set; } = false;
+        public bool IsReminder { get; set; } = false;
     }
 }

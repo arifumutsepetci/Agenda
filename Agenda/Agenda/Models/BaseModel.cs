@@ -12,11 +12,7 @@ namespace Agenda
             get
             {
                 if (_dbContext == default(AgendaContext))
-                {
-                    var optionsBuilder = new DbContextOptionsBuilder<AgendaContext>();
-                    optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Agenda;Integrated Security=True");
-                    _dbContext = new AgendaContext(optionsBuilder.Options);
-                }
+                    _dbContext = new AgendaContext();
                 return _dbContext;
             }
         }
