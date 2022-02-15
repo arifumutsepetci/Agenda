@@ -2,6 +2,10 @@
     $('#addEventModal').modal('show');
 });
 
+$('.event').on("click", function () {
+    $('#editEventModal').modal('show');
+})
+
 $('#close-modal').click(function () {
     $('#addEventModal').modal('toggle');
 });

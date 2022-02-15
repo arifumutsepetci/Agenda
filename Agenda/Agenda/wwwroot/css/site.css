@@ -66,6 +66,7 @@ body {
 
 .overdue {
     color: black;
+    text-decoration: none;
 }
 
 .add-event {
@@ -97,3 +98,36 @@ td ul li {
 #event-is-interval {
     margin-top: 12px;
 }
+
+.event {
+    border-block: none;
+    border: none;
+    text-decoration: none;
+}
+
+    .event:hover {
+        color: ButtonShadow
+    }
+
+.hasExplanation {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+    .hasExplanation .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 1;
+        top: -5px;
+        right: 123%;
+    }
+
+    .hasExplanation:hover .tooltiptext {
+        visibility: visible;
+    }

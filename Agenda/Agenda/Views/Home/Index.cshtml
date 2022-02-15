@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <input id="IsEventAddedSuccessfully" type="hidden" asp-for="IsAddingSuccessful" />
 <table class="table">
     <thead>
@@ -56,7 +55,13 @@
                         <ul>
                             <li>
                                 <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                <b>@item.Event.Title</b> <i>due:</i> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                <a href="javascript:void(0)" class="event overdue @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
                             </li>
                         </ul>
                     }
@@ -67,34 +72,50 @@
                         <ul>
                             <li>
                                 <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                <a href="javascript:void(0)" class="event very-urgent @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
                             </li>
                         </ul>
                     }
                 </td>
-
                 <td class="urgent">
                     <div style="text-align:left">
 
                         @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Urgent && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                         {
                             <ul>
-                                <li>
-                                    <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                    <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
-                                </li>
-                            </ul>
+                            <li>
+                                <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
+                                <a href="javascript:void(0)" class="event urgent @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
+                            </li>
+                        </ul>
                         }
                     </div>
                 </td>
-
                 <td class="normal">
                     @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.Normal && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
                         <ul>
                             <li>
                                 <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                <a href="javascript:void(0)" class="event normal @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
                             </li>
                         </ul>
                     }
@@ -105,7 +126,13 @@
                         <ul>
                             <li>
                                 <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                <a href="javascript:void(0)" class="event not-urgent @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
                             </li>
                         </ul>
                     }
@@ -113,10 +140,16 @@
                 <td class="not-urgent-at-all">
                     @foreach (var item in Model.EventList.Where(i => i.Event.EventUrgencyId == AgendaDataAccessLayer.EventUrgency.NotUrgentAtAll && i.Event.EventDate > DateTime.Now).OrderByDescending(i => i.Event.EventDate).ThenBy(i => i.Event.Title))
                     {
-                        <ul>
+                         <ul>
                             <li>
                                 <input type="checkbox" id=@item.Event.ObjectId class="form-check-input">
-                                <b>@item.Event.Title:</b> @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                <a href="javascript:void(0)" class="event not-urgent-at-all @(!String.IsNullOrEmpty(item.Event.Explanation) ? "hasExplanation" : "")" id="editEvent-@item.Event.ObjectId">
+                                    <b>@item.Event.Title</b>
+                                    <br />
+                                    <i>&nbsp;due:</i>
+                                    @item.Event.EventDate.ToString("dd-MM-yyyy")
+                                    <span class="tooltiptext">@item.Event.Explanation</span>
+                                </a>
                             </li>
                         </ul>
                     }
@@ -127,4 +160,13 @@
 </table>
 <div class="container done-event-div">
     <button id="done-event-button" type="submit" class="btn btn-dark">Done!</button>
+</div>
+<div class="modal fade" id="editEventModal" tabindex="-1" role="dialog" aria-labelledby="editEventModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEventModalTitle">Add Event</h5>
+            </div>
+        </div>
+    </div>
 </div>
